@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>sbx-core-parent</artifactId>
+        <groupId>com.sbx</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath/>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.sbx</groupId>
+    <artifactId>sbx-work</artifactId>
+
+    <properties>
+        <sbx-common.version>1.0.0-SNAPSHOT</sbx-common.version>
+        <sbx-system-api.version>1.0.0-SNAPSHOT</sbx-system-api.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.sbx</groupId>
+            <artifactId>sbx-common</artifactId>
+            <version>${sbx-common.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sbx</groupId>
+            <artifactId>sbx-system-api</artifactId>
+            <version>${sbx-system-api.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.sbx</groupId>
+            <artifactId>sbx-core-dubbo</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sbx</groupId>
+            <artifactId>sbx-core-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sbx</groupId>
+            <artifactId>sbx-core-model</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sbx</groupId>
+            <artifactId>sbx-core-cloud</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sbx</groupId>
+            <artifactId>sbx-core-log</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sbx</groupId>
+            <artifactId>sbx-core-launch</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.sbx</groupId>
+            <artifactId>sbx-core-tool</artifactId>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.hynnet</groupId>-->
+<!--            <artifactId>jacob</artifactId>-->
+<!--            <version>1.18</version>-->
+<!--        </dependency>-->
+
+        <!-- 验证码 -->
+        <dependency>
+            <groupId>com.github.whvcse</groupId>
+            <artifactId>easy-captcha</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sbx</groupId>
+            <artifactId>sbx-core-redis</artifactId>
+        </dependency>
+
+
+    </dependencies>
+
+    <build>
+        <finalName>${project.name}</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot.version}</version>
+                    <configuration>
+                        <finalName>${project.build.finalName}</finalName>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <copy overwrite="true"
+                                      tofile="${session.executionRootDirectory}/target/${project.artifactId}.jar"
+                                      file="${project.build.directory}/${project.artifactId}.jar" />
+                            </tasks>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
