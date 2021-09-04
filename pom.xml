@@ -16,6 +16,8 @@
     <properties>
         <sbx-common.version>1.0.0-SNAPSHOT</sbx-common.version>
         <sbx-system-api.version>1.0.0-SNAPSHOT</sbx-system-api.version>
+
+        <alibaba.nacos.version>2.0.3</alibaba.nacos.version>
     </properties>
 
     <dependencies>
@@ -49,6 +51,17 @@
         <dependency>
             <groupId>com.sbx</groupId>
             <artifactId>sbx-core-cloud</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.alibaba.nacos</groupId>
+                    <artifactId>nacos-client</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-client</artifactId>
+            <version>${alibaba.nacos.version}</version>
         </dependency>
         <dependency>
             <groupId>com.sbx</groupId>
