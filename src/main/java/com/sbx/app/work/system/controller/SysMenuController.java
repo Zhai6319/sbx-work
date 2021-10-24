@@ -44,7 +44,7 @@ public class SysMenuController {
     @GetMapping("")
     @ApiOperation(value = "菜单树形结构列表",notes = "菜单树形结构列表")
     public Response<List<MenuTreeVO>> menuAndButtonsTree(MenuTreeRequest request){
-        List<SysMenuDTO> dtoList = sysMenuRepository.listMenuByAscription(request.getAscription());
+        List<SysMenuDTO> dtoList = sysMenuRepository.listMenuByAscription(request.getAscription(),request.getType());
         List<MenuTreeVO> voList = ObjectUtils.copyList(dtoList,MenuTreeVO.class);
         return Response.data(ForestNodeMerger.merge(voList));
     }

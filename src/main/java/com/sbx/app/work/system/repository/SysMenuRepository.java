@@ -81,8 +81,9 @@ public class SysMenuRepository {
      * @param ascription    菜单归属
      * @return              返回菜单列表
      */
-    public List<SysMenuDTO> listMenuByAscription(Integer ascription){
+    public List<SysMenuDTO> listMenuByAscription(Integer ascription,Integer menuType){
         SysMenuParam param = new SysMenuParam();
+        param.setMenuType(menuType);
         param.setAscription(ascription);
         return this.listMenu(param);
     }
