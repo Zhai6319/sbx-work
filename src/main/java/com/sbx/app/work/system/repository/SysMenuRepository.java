@@ -1,6 +1,5 @@
 package com.sbx.app.work.system.repository;
 
-import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
 import com.sbx.app.system.api.ISysAuthoritiesApi;
 import com.sbx.app.system.api.ISysMenuApi;
@@ -11,9 +10,7 @@ import com.sbx.app.system.params.ChangeSortParam;
 import com.sbx.app.system.params.SaveMenuAuthorityParam;
 import com.sbx.app.system.params.SysAuthoritiesParam;
 import com.sbx.app.system.params.SysMenuParam;
-import com.sbx.core.model.api.Response;
 import com.sbx.core.model.base.result.PageResult;
-import com.sbx.core.model.exception.CustomException;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Service;
