@@ -4,8 +4,11 @@ import com.sbx.app.system.api.ISysAuthoritiesApi;
 import com.sbx.app.system.dto.SysAuthoritiesDTO;
 import com.sbx.app.system.params.SysAuthoritiesParam;
 import com.sbx.core.model.base.result.PageResult;
+import com.sbx.core.tool.util.ObjectUtils;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * <p>
@@ -29,6 +32,15 @@ public class SysAuthoritiesRepository {
      */
     public PageResult<SysAuthoritiesDTO> page(SysAuthoritiesParam param){
         return iSysAuthoritiesApi.queryByCondition(param).computeDataOrFailThrow();
+    }
+
+    /**
+     * 条件查询列表
+     * @param param 查询条件
+     * @return  返回列表数据
+     */
+    public List<SysAuthoritiesDTO> list(SysAuthoritiesParam param) {
+        return ObjectUtils.mergePaging(param, this::page);
     }
 
     /**

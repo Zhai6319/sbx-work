@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * <p>
@@ -25,7 +26,7 @@ import javax.annotation.Resource;
  */
 @RestController
 @Api(tags = "系统权限接口")
-@RequestMapping("/system/sys-authorities")
+@RequestMapping("/system/authorities")
 public class SysAuthoritiesController {
 
     @Resource
@@ -38,6 +39,15 @@ public class SysAuthoritiesController {
         PageResult<SysAuthoritiesDTO> dtoPageResult = sysAuthoritiesRepository.page(param);
         PageResult<SysAuthoritiesVO> pageResult = ObjectUtils.copyPage(dtoPageResult,SysAuthoritiesVO.class);
         return Response.data(pageResult);
+    }
+
+    @GetMapping("/listByMenuId/{menuId:\\d+}")
+    @ApiOperation(value = "根据菜单id查询菜单权限",notes = "根据菜单id查询菜单权限")
+    public Response<List<SysAuthoritiesVO>> listByMenuId(@PathVariable("menuId") Long menuId) {
+        SysAuthoritiesParam param = new SysAuthoritiesParam();
+        param.setMenuId(menuId);
+        List<SysAuthoritiesDTO> authoritiesList = sysAuthoritiesRepository.list(param);
+        return Response.data(ObjectUtils.copyList(authoritiesList,SysAuthoritiesVO.class));
     }
 
     @GetMapping("/{id:\\d+}")

@@ -1,5 +1,6 @@
 package com.sbx.app.work.user.repository;
 
+import com.google.common.collect.Lists;
 import com.sbx.app.system.dto.SysMenuDTO;
 import com.sbx.app.user.api.IUserInfoApi;
 import com.sbx.app.user.dto.UserInfoDTO;
@@ -10,11 +11,18 @@ import com.sbx.app.user.enums.UserSourceEnum;
 import com.sbx.app.user.enums.UserTypeEnum;
 import com.sbx.app.user.params.UserInfoParam;
 import com.sbx.app.user.params.UserSaveParam;
+import com.sbx.core.model.base.dto.BaseDTO;
 import com.sbx.core.model.base.result.PageResult;
+import com.sbx.core.tool.util.CollectionUtil;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -38,6 +46,52 @@ public class UserInfoRepository {
      */
     public PageResult<UserInfoDetailDTO> page(UserInfoParam param){
         return iUserInfoApi.queryByCondition(param).computeDataOrFailThrow();
+    }
+
+    public PageResult<UserInfoDTO> queryByCondition(UserInfoParam param){
+        return iUserInfoApi.queryPageByCondition(param).computeDataOrFailThrow();
+    }
+
+    public List<UserInfoDTO> list(UserInfoParam param) {
+        List<UserInfoDTO> allList = Lists.newArrayList();
+        long size = 200L;
+        long current = 1L;
+        param.setSize(size);
+        boolean flag = true;
+        do {
+            param.setCurrent(current);
+            PageResult<UserInfoDTO> pageResult = this.queryByCondition(param);
+            // 为空不需要更新，跳出循环;不为空则更新
+            if (CollectionUtils.isEmpty(pageResult.getRecords())) {
+                flag = false;
+            } else {
+                allList.addAll(pageResult.getRecords());
+                // 查询数量不等于分页数量即为最后一页，跳出循环
+                if (size != pageResult.getRecords().size()) {
+                    flag = false;
+                }
+            }
+            current++;
+            // 循环次数大于50退出循环，实际总数最多10W左右
+        } while (flag && current < 50);
+        return allList;
+    }
+
+    public List<UserInfoDTO> listByIds(List<Long> ids) {
+        if (CollectionUtil.isEmpty(ids)) {
+            return Collections.emptyList();
+        }
+        UserInfoParam param = new UserInfoParam();
+        param.setIds(ids);
+        return this.list(param);
+    }
+
+    public Map<Long, UserInfoDTO> mapByIds(List<Long> ids) {
+        if (CollectionUtil.isEmpty(ids)) {
+            return Collections.emptyMap();
+        }
+        List<UserInfoDTO> userList = this.listByIds(ids);
+        return userList.stream().collect(Collectors.toMap(BaseDTO::getId, Function.identity()));
     }
 
     /**

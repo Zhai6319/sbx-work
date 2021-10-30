@@ -1,6 +1,9 @@
 package com.sbx.app.work.common;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sbx.app.log.dto.LogDTO;
+import com.sbx.app.system.enums.AscriptionEnum;
+import com.sbx.app.work.log.repository.LogRepository;
 import com.sbx.common.header.HeadName;
 import com.sbx.core.redis.client.RedisScriptManager;
 import com.sbx.core.tool.util.WebUtil;
@@ -36,6 +39,8 @@ public class LogExecute extends AbstractLogExecute {
 
     @Resource
     private RedisScriptManager redisScriptManager;
+    @Resource
+    private LogRepository logRepository;
 
     @SneakyThrows
     @Override
@@ -75,25 +80,24 @@ public class LogExecute extends AbstractLogExecute {
                 params.add(o);
             }
         }
-//        LogDTO logDTO = new LogDTO();
-//        logDTO.setTitle(apiOperation.value());
-//        if (Objects.nonNull(log)) {
-//            logDTO.setTitle(log.value());
-//        }
-//        Map<String,Object> content = Maps.newHashMap();
-//        content.put("接口描述",apiOperation.value());
-//        content.put("请求结果",result);
-//        logDTO.setContent(JSONObject.toJSONString(content));
-//        logDTO.setAscription(AscriptionEnum.WORK.getCode());
-//        logDTO.setLogType(1);
-//        logDTO.setMethod(request.getMethod());
-//        logDTO.setMethodClass(className);
-//        logDTO.setMethodName(methodName);
-//        logDTO.setUserId(WorkContext.getUserId(false));
-//        logDTO.setRemoteIp(WebUtil.getRemoteIP());
-//        logDTO.setRequestUri(request.getRequestURI());
-//        logDTO.setParams(JSONObject.toJSONString(params));
-//        logDTO.setAscription(AscriptionEnum.WORK.getCode());
-//        logRepository.create(logDTO);
+        LogDTO logDTO = new LogDTO();
+        logDTO.setLogTitle(apiOperation.value());
+        logDTO.setLogType(0);
+        if (Objects.nonNull(log)) {
+            logDTO.setLogType(log.logType());
+            logDTO.setLogTitle(log.value());
+        }
+        Map<String,Object> content = Maps.newHashMap();
+        content.put("接口描述",apiOperation.value());
+        content.put("请求结果",result);
+        logDTO.setContent(JSONObject.toJSONString(content));
+        logDTO.setMethod(request.getMethod());
+        logDTO.setMethodClass(className);
+        logDTO.setMethodName(methodName);
+        logDTO.setUserId(WorkContext.getUserId(false));
+        logDTO.setRemoteIp(WebUtil.getRemoteIP());
+        logDTO.setRequestUri(request.getRequestURI());
+        logDTO.setParams(JSONObject.toJSONString(params));
+        logRepository.create(logDTO);
     }
 }
