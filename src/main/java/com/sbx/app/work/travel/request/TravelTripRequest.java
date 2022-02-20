@@ -1,12 +1,11 @@
-package com.sbx.app.work.product.vo;
+package com.sbx.app.work.travel.request;
 
+import com.sbx.core.model.params.Query;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-
-import java.io.Serializable;
 
 /**
 * <p>
@@ -14,13 +13,13 @@ import java.io.Serializable;
 * </p>
 *
 * @author Z.jc
-* @since 2021-07-24
+* @since 2022-02-19
 */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@ApiModel(value = "ProductTripVO对象",description = "每日行程介绍接口返回参数")
-public class ProductTripVO implements Serializable {
+@ApiModel(value = "TravelTripRequest对象",description = "每日行程介绍接口请求参数")
+public class TravelTripRequest extends Query {
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "主键id")
     private Long id;

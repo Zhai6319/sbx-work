@@ -16,6 +16,8 @@
     <properties>
         <sbx-common.version>1.0.0-SNAPSHOT</sbx-common.version>
         <sbx-system-api.version>1.0.0-SNAPSHOT</sbx-system-api.version>
+        <sbx-rebate-api.version>1.0.0-SNAPSHOT</sbx-rebate-api.version>
+        <sbx-ota-api.version>1.0.0-SNAPSHOT</sbx-ota-api.version>
 
         <alibaba.nacos.version>2.0.3</alibaba.nacos.version>
     </properties>
@@ -28,8 +30,23 @@
         </dependency>
         <dependency>
             <groupId>com.sbx</groupId>
+            <artifactId>sbx-core-test</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sbx</groupId>
             <artifactId>sbx-system-api</artifactId>
             <version>${sbx-system-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sbx</groupId>
+            <artifactId>sbx-rebate-api</artifactId>
+            <version>${sbx-rebate-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sbx</groupId>
+            <artifactId>sbx-ota-api</artifactId>
+            <version>${sbx-ota-api.version}</version>
         </dependency>
 
 

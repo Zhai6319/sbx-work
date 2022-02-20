@@ -1,4 +1,4 @@
-package com.sbx.app.work.product.request;
+package com.sbx.app.work.travel.request;
 
 import com.sbx.core.model.params.Query;
 import io.swagger.annotations.ApiModel;
@@ -13,13 +13,13 @@ import lombok.experimental.Accessors;
 * </p>
 *
 * @author Z.jc
-* @since 2021-07-24
+* @since 2022-02-19
 */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@ApiModel(value = "ProductRegionRequest对象",description = "区域信息接口请求参数")
-public class ProductRegionRequest extends Query {
+@ApiModel(value = "TravelRegionRequest对象",description = "区域信息接口请求参数")
+public class TravelRegionRequest extends Query {
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "主键id")
     private Long id;

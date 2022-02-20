@@ -51,22 +51,22 @@ public class SwaggerConfig {
     @Bean
     public Docket createVehiclesRestApi() {
         return new Docket(DocumentationType.OAS_30)
-                .groupName("vehicles")
+                .groupName("travel")
                 .produces(produces())
                 .ignoredParameterTypes(ignoredParameterTypes())
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                .apis(RequestHandlerSelectors.basePackage("com.sbx.app.work.vehicles.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.sbx.app.work.travel.controller"))
                 .paths(PathSelectors.any())
                 .build()
-                .apiInfo(vehiclesApiInfo())
+                .apiInfo(travelApiInfo())
                 .globalRequestParameters(parameters());
     }
 
-    private ApiInfo vehiclesApiInfo() {
+    private ApiInfo travelApiInfo() {
         return new ApiInfoBuilder()
-                .title("车辆管理")
-                .description("车辆管理API文档")
+                .title("旅游管理")
+                .description("旅游管理API文档")
                 .license("license by sbx")
                 .version("1.0")
                 .build();
@@ -121,126 +121,6 @@ public class SwaggerConfig {
     }
 
     @Bean
-    public Docket createStationRestApi() {
-        return new Docket(DocumentationType.OAS_30)
-                .groupName("station")
-                .produces(produces())
-                .ignoredParameterTypes(ignoredParameterTypes())
-                .select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                .apis(RequestHandlerSelectors.basePackage("com.sbx.app.work.station.controller"))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(stationApiInfo())
-                .globalRequestParameters(parameters());
-    }
-
-    private ApiInfo stationApiInfo() {
-        return new ApiInfoBuilder()
-                .title("驿站管理")
-                .description("驿站管理API文档")
-                .license("license by sbx")
-                .version("1.0")
-                .build();
-    }
-
-    @Bean
-    public Docket createPartnerRestApi() {
-        return new Docket(DocumentationType.OAS_30)
-                .groupName("partner")
-                .produces(produces())
-                .ignoredParameterTypes(ignoredParameterTypes())
-                .select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                .apis(RequestHandlerSelectors.basePackage("com.sbx.app.work.partner.controller"))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(partnerApiInfo())
-                .globalRequestParameters(parameters());
-    }
-
-    private ApiInfo partnerApiInfo() {
-        return new ApiInfoBuilder()
-                .title("合伙人管理")
-                .description("合伙人管理API文档")
-                .license("license by sbx")
-                .version("1.0")
-                .build();
-    }
-
-    @Bean
-    public Docket createNotifyRestApi() {
-        return new Docket(DocumentationType.OAS_30)
-                .groupName("notify")
-                .produces(produces())
-                .ignoredParameterTypes(ignoredParameterTypes())
-                .select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                .apis(RequestHandlerSelectors.basePackage("com.sbx.app.work.notify.controller"))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(notifyApiInfo())
-                .globalRequestParameters(parameters());
-    }
-
-    private ApiInfo notifyApiInfo() {
-        return new ApiInfoBuilder()
-                .title("系统通知")
-                .description("系统通知API文档")
-                .license("license by sbx")
-                .version("1.0")
-                .build();
-    }
-
-    @Bean
-    public Docket createHelpRestApi() {
-        return new Docket(DocumentationType.OAS_30)
-                .groupName("help")
-                .produces(produces())
-                .ignoredParameterTypes(ignoredParameterTypes())
-                .select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                .apis(RequestHandlerSelectors.basePackage("com.sbx.app.work.help.controller"))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(helpApiInfo())
-                .globalRequestParameters(parameters());
-    }
-
-    private ApiInfo helpApiInfo() {
-        return new ApiInfoBuilder()
-                .title("客服中心")
-                .description("客服中心API文档")
-                .license("license by sbx")
-                .version("1.0")
-                .build();
-    }
-
-    @Bean
-    public Docket createOrderRestApi() {
-        return new Docket(DocumentationType.OAS_30)
-                .groupName("order")
-                .produces(produces())
-                .ignoredParameterTypes(ignoredParameterTypes())
-                .select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                .apis(RequestHandlerSelectors.basePackage("com.sbx.app.work.order.controller"))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(orderApiInfo())
-                .globalRequestParameters(parameters());
-    }
-
-    private ApiInfo orderApiInfo() {
-        return new ApiInfoBuilder()
-                .title("订单管理")
-                .description("订单管理API文档")
-                .license("license by sbx")
-                .version("1.0")
-                .build();
-    }
-
-    @Bean
     public Docket createAuthRestApi() {
         return new Docket(DocumentationType.OAS_30)
                 .groupName("auth")
@@ -264,53 +144,6 @@ public class SwaggerConfig {
                 .build();
     }
 
-    @Bean
-    public Docket createSettingsRestApi() {
-        return new Docket(DocumentationType.OAS_30)
-                .groupName("settings")
-                .produces(produces())
-                .ignoredParameterTypes(ignoredParameterTypes())
-                .select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                .apis(RequestHandlerSelectors.basePackage("com.sbx.app.work.settings.controller"))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(settingsApiInfo())
-                .globalRequestParameters(parameters());
-    }
-
-    private ApiInfo settingsApiInfo() {
-        return new ApiInfoBuilder()
-                .title("设置信息")
-                .description("设置信息API文档")
-                .license("license by sbx")
-                .version("1.0")
-                .build();
-    }
-
-    @Bean
-    public Docket createBusinessRestApi() {
-        return new Docket(DocumentationType.OAS_30)
-                .groupName("business")
-                .produces(produces())
-                .ignoredParameterTypes(ignoredParameterTypes())
-                .select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                .apis(RequestHandlerSelectors.basePackage("com.sbx.app.work.business.controller"))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(businessApiInfo())
-                .globalRequestParameters(parameters());
-    }
-
-    private ApiInfo businessApiInfo() {
-        return new ApiInfoBuilder()
-                .title("业务管理")
-                .description("业务管理API文档")
-                .license("license by sbx")
-                .version("1.0")
-                .build();
-    }
 
     @Bean
     public Docket createLogRestApi() {
@@ -336,75 +169,4 @@ public class SwaggerConfig {
                 .build();
     }
 
-    @Bean
-    public Docket createAccountRestApi() {
-        return new Docket(DocumentationType.OAS_30)
-                .groupName("account")
-                .produces(produces())
-                .ignoredParameterTypes(ignoredParameterTypes())
-                .select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                .apis(RequestHandlerSelectors.basePackage("com.sbx.app.work.account.controller"))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(accountApiInfo())
-                .globalRequestParameters(parameters());
-    }
-
-    private ApiInfo accountApiInfo() {
-        return new ApiInfoBuilder()
-                .title("账户管理")
-                .description("账户管理API文档")
-                .license("license by sbx")
-                .version("1.0")
-                .build();
-    }
-
-    @Bean
-    public Docket createDataRestApi() {
-        return new Docket(DocumentationType.OAS_30)
-                .groupName("data")
-                .produces(produces())
-                .ignoredParameterTypes(ignoredParameterTypes())
-                .select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                .apis(RequestHandlerSelectors.basePackage("com.sbx.app.work.data.controller"))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(dataApiInfo())
-                .globalRequestParameters(parameters());
-    }
-
-    private ApiInfo dataApiInfo() {
-        return new ApiInfoBuilder()
-                .title("数据管理")
-                .description("数据管理API文档")
-                .license("license by sbx")
-                .version("1.0")
-                .build();
-    }
-
-    @Bean
-    public Docket createDriverRestApi() {
-        return new Docket(DocumentationType.OAS_30)
-                .groupName("driver")
-                .produces(produces())
-                .ignoredParameterTypes(ignoredParameterTypes())
-                .select()
-                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                .apis(RequestHandlerSelectors.basePackage("com.sbx.app.work.driver.controller"))
-                .paths(PathSelectors.any())
-                .build()
-                .apiInfo(driverApiInfo())
-                .globalRequestParameters(parameters());
-    }
-
-    private ApiInfo driverApiInfo() {
-        return new ApiInfoBuilder()
-                .title("司机管理")
-                .description("司机管理API文档")
-                .license("license by sbx")
-                .version("1.0")
-                .build();
-    }
 }

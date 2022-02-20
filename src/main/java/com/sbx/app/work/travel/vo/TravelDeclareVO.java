@@ -1,4 +1,4 @@
-package com.sbx.app.work.product.vo;
+package com.sbx.app.work.travel.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
@@ -12,36 +12,34 @@ import java.time.LocalDateTime;
 
 /**
 * <p>
-* 产品声明
+* 旅行声明
 * </p>
 *
 * @author Z.jc
-* @since 2021-07-24
+* @since 2022-02-19
 */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "ProductDeclareVO对象",description = "产品声明接口返回参数")
-public class ProductDeclareVO implements Serializable {
+@ApiModel(value = "TravelDeclareVO对象",description = "旅行声明接口返回参数")
+public class TravelDeclareVO implements Serializable {
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "主键id")
     private Long id;
 
-    @ApiModelProperty(value = "声明类型 1产品声明 2退款声明 3安全须知 4物资准备")
-    private Integer declareType;
-
     @ApiModelProperty(value = "声明名称")
     private String declareName;
+
+    @ApiModelProperty(value = "展示名称")
+    private String showName;
 
     @ApiModelProperty(value = "声明内容")
     private String content;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @ApiModelProperty(value = "修改时间")
     private LocalDateTime updateTime;
 
 
