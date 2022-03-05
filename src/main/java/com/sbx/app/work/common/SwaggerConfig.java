@@ -169,4 +169,28 @@ public class SwaggerConfig {
                 .build();
     }
 
+    @Bean
+    public Docket createAppletRestApi() {
+        return new Docket(DocumentationType.OAS_30)
+                .groupName("applet")
+                .produces(produces())
+                .ignoredParameterTypes(ignoredParameterTypes())
+                .select()
+                .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
+                .apis(RequestHandlerSelectors.basePackage("com.sbx.app.work.applet.controller"))
+                .paths(PathSelectors.any())
+                .build()
+                .apiInfo(appletApiInfo())
+                .globalRequestParameters(parameters());
+    }
+
+    private ApiInfo appletApiInfo() {
+        return new ApiInfoBuilder()
+                .title("小程序管理")
+                .description("小程序管理API文档")
+                .license("license by sbx")
+                .version("1.0")
+                .build();
+    }
+
 }
